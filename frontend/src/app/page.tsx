@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const templates = [
-  { id: "classic", name: "Classic", blurb: "Clean, ATS-friendly, works everywhere." },
-  { id: "modern", name: "Modern", blurb: "A touch of colour for a contemporary look." },
-  { id: "compact", name: "Compact", blurb: "Dense one-page layout for long careers." },
-  { id: "academic", name: "Academic/CV", blurb: "Formal serif style for senior leadership roles." },
+  { id: "classic", name: "Classic", blurb: "Clean, ATS-friendly, works everywhere.", idealFor: "Freshers and first applications" },
+  { id: "modern", name: "Modern", blurb: "A touch of colour for a contemporary look.", idealFor: "Private and international schools" },
+  { id: "compact", name: "Compact", blurb: "Dense one-page layout for long careers.", idealFor: "Experienced PGT/TGT with many years" },
+  { id: "academic", name: "Academic/CV", blurb: "Formal serif style for senior leadership roles.", idealFor: "HODs, Vice-Principals and Principals" },
 ];
 
 const features = [
@@ -46,7 +46,7 @@ export default function Home() {
           </Link>
           <Link
             href="/signup"
-            className="rounded-md bg-zinc-900 px-4 py-1.5 text-sm font-semibold text-white hover:bg-zinc-700"
+            className="rounded-full bg-zinc-900 px-4 py-1.5 text-sm font-semibold text-white hover:bg-zinc-700"
           >
             Get started
           </Link>
@@ -62,20 +62,23 @@ export default function Home() {
           Built for PGT/TGT/PRT teachers, HODs and Principals — boards, subjects, B.Ed/CTET, and
           classroom impact, not generic office bullet points.
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/signup"
-            className="rounded-md bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-zinc-700"
+            className="rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-zinc-700"
           >
             Get started — it&apos;s free
           </Link>
           <a
             href="#before-after"
-            className="rounded-md border border-zinc-300 px-5 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-100"
+            className="rounded-full border border-zinc-300 px-6 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-100"
           >
             See an example
           </a>
         </div>
+        <p className="text-sm text-zinc-500">
+          Free to start &bull; No credit card &bull; PDF download &bull; English &amp; Hindi
+        </p>
       </section>
 
       {/* Before / after */}
@@ -89,7 +92,7 @@ export default function Home() {
             rather than inventing them.
           </p>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="rounded-lg border border-zinc-200 bg-white p-5">
+            <div className="rounded-2xl border border-zinc-200 bg-white p-5">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-400">Before</p>
               <p className="text-zinc-700">&ldquo;Taught maths to class 8&rdquo;</p>
             </div>
@@ -129,7 +132,7 @@ export default function Home() {
           <h2 className="mb-10 text-center text-2xl font-bold text-zinc-900">Four templates, one form</h2>
           <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
             {templates.map((t) => (
-              <div key={t.id} className="overflow-hidden rounded-lg border border-zinc-200 bg-white">
+              <div key={t.id} className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
                 <div className="relative h-48 w-full overflow-hidden bg-zinc-100">
                   <Image
                     src={`/templates/${t.id}.png`}
@@ -142,6 +145,9 @@ export default function Home() {
                 <div className="p-3">
                   <p className="text-sm font-semibold text-zinc-900">{t.name}</p>
                   <p className="text-xs text-zinc-500">{t.blurb}</p>
+                  <p className="mt-2 inline-block rounded-lg bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
+                    Ideal for: {t.idealFor}
+                  </p>
                 </div>
               </div>
             ))}
