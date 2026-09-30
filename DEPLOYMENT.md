@@ -1,5 +1,9 @@
 # Deployment guide
 
+> **Status: done.** This app is live at https://teacher-resume-builder.vercel.app (backend:
+> https://teacher-resume-backend.onrender.com, database: Neon). The steps below are what it took
+> - kept here so you can redo it (e.g. a second environment) or hand it to someone else.
+
 This gets the app live on the internet, all on free tiers: **Vercel** (frontend), **Render**
 (backend, via the `render.yaml` Blueprint + `backend/Dockerfile` already in this repo), and
 **Neon** (Postgres). You'll need to create accounts on these three services yourself - that's not
@@ -25,13 +29,13 @@ file.
 1. Sign up at [render.com](https://render.com) (free tier).
 2. New → **Blueprint**, connect this GitHub repo. Render reads `render.yaml` at the repo root
    and proposes a `teacher-resume-backend` web service built from `backend/Dockerfile`.
-3. Before the first deploy, set these environment variables in the Render dashboard (the
-   Blueprint marks them `sync: false`, meaning "you set this manually"):
+3. Before the first deploy, set these on the service's **Environment** tab (the Blueprint marks
+   them `sync: false`, meaning "you set this manually" - it may not even show a blank row for
+   them until you click **+ Add variable** yourself):
    - `DATABASE_URL` - the Neon connection string from step 2
    - `OPENROUTER_API_KEY` - your OpenRouter key (optional - AI features degrade to a clear error
      without it)
-   - `CORS_ORIGINS` - leave as `http://localhost:3000` for now; you'll update this in step 5
-     once you have your Vercel URL
+   - `CORS_ORIGINS` - skip this for now; you'll add it in step 5 once you have your Vercel URL
 4. Deploy. Render builds the Docker image (Typst and the bundled fonts are baked in, so no
    further font setup is needed) and gives you a URL like `https://teacher-resume-backend.onrender.com`.
    Visit `<that-url>/health` to confirm it's up.
@@ -48,6 +52,11 @@ file.
 3. Add an environment variable: `NEXT_PUBLIC_API_URL` = your Render backend URL from step 3
    (e.g. `https://teacher-resume-backend.onrender.com`, no trailing slash).
 4. Deploy. Vercel gives you a URL like `https://your-app.vercel.app`.
+
+> **Gotcha we actually hit:** Next.js bakes `NEXT_PUBLIC_*` variables into the JavaScript bundle
+> at **build time**, not read at runtime. If you add/change this env var after the first deploy,
+> the old build keeps using the old value (or the `127.0.0.1` fallback) until you explicitly
+> **Redeploy** (Deployments tab → ⋯ → Redeploy) - refreshing the page or waiting does nothing.
 
 ## 5. Close the loop: update CORS
 

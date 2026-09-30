@@ -4,6 +4,9 @@ An AI resume builder built specifically for school teachers — subjects/boards/
 B.Ed/CTET/TET/NET, exam/administrative duties, co-curricular work — rather than generic
 office-job resume fields.
 
+**Live:** https://teacher-resume-builder.vercel.app (backend on Render free tier - the first
+request after a while may take ~30-60s to wake up)
+
 ## Status
 
 - [x] M0 - Backend scaffold + Typst render pipeline proven with a hardcoded sample
@@ -15,8 +18,8 @@ office-job resume fields.
 - [x] M6 - Cover letter / teaching philosophy generator
 - [x] M7 - Multi-version management (duplicate/rename/delete/compare)
 - [x] M9 - Landing page + polish
+- [x] M10 - Deployment (Vercel + Render + Neon, all free tier - see [DEPLOYMENT.md](DEPLOYMENT.md))
 - [ ] M8 - Billing (Stripe test mode) - not started; app is fully usable without it, free-tier limits apply
-- [ ] M10 - Deployment
 
 ## Repository layout
 
