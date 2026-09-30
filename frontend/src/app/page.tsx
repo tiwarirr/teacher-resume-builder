@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { TemplateGallery } from "@/components/TemplateGallery";
 
 const templates = [
   { id: "classic", name: "Classic", blurb: "Clean, ATS-friendly, works everywhere.", idealFor: "Freshers and first applications" },
@@ -130,28 +130,7 @@ export default function Home() {
       <section className="bg-zinc-50 py-16">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="mb-10 text-center text-2xl font-bold text-zinc-900">Four templates, one form</h2>
-          <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
-            {templates.map((t) => (
-              <div key={t.id} className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
-                <div className="relative h-48 w-full overflow-hidden bg-zinc-100">
-                  <Image
-                    src={`/templates/${t.id}.png`}
-                    alt={`${t.name} template preview`}
-                    fill
-                    className="object-cover object-top"
-                    sizes="(min-width: 1024px) 25vw, 50vw"
-                  />
-                </div>
-                <div className="p-3">
-                  <p className="text-sm font-semibold text-zinc-900">{t.name}</p>
-                  <p className="text-xs text-zinc-500">{t.blurb}</p>
-                  <p className="mt-2 inline-block rounded-lg bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
-                    Ideal for: {t.idealFor}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TemplateGallery templates={templates} />
         </div>
       </section>
 
