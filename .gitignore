@@ -1,0 +1,18 @@
+# Backend (Python)
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/output/
+backend/.env
+backend/*.db
+*.pyc
+
+# Frontend - frontend/.gitignore (from create-next-app) covers node_modules, .next, etc.
+frontend/.env.local
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.claude/

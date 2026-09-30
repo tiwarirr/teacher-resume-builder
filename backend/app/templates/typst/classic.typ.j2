@@ -1,0 +1,44 @@
+#set page(margin: (x: 1.8cm, y: 1.5cm))
+#set text(font: ("Noto Sans", "Noto Sans Devanagari"), size: 10pt)
+#set par(justify: true)
+#set list(marker: [#sym.bullet])
+
+#align(center)[
+  #text(size: 18pt, weight: "bold")[<< profile.full_name >>]
+
+  << profile.email >> #sym.dot.c << profile.phone >><< " " ~ "·" ~ " " ~ profile.address if profile.address else "" >>
+]
+
+#v(4pt)
+#line(length: 100%, stroke: 0.5pt)
+
+<% if summary %>
+<< summary >>
+<% endif %>
+
+= << labels.education >>
+<% for edu in education %>
+- *<< edu.degree >>*, << edu.institution >> (<< edu.board_or_university >>) --- << edu.year >><< ", " ~ edu.score if edu.score else "" >>
+<% endfor %>
+
+= << labels.qualifications >>
+<% for q in qualifications %>
+- *<< q.type >>* --- << q.issuing_body >>, << q.year >><< " (" ~ q.score_or_paper ~ ")" if q.score_or_paper else "" >>
+<% endfor %>
+
+= << labels.experience >>
+<% for exp in experience %>
+== << exp.school >> --- << exp.post >> (<< exp.board >>)
+#emph[<< exp.subjects | join(", ") >> #sym.dot.c << labels.classes_label >> << exp.classes_taught | join(", ") >> #sym.dot.c << exp.dates >>]
+<% for bullet in exp.bullets %>
+- << bullet >>
+<% endfor %>
+<% endfor %>
+
+= << labels.admin_roles >>
+<% for role in admin_roles %>
+- *<< role.title >>* (<< role.duration >>) --- << role.description >>
+<% endfor %>
+
+= << labels.edtech_skills >>
+<< edtech_skills | join(", ") >>

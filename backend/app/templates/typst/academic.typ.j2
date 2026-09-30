@@ -1,0 +1,70 @@
+#set page(margin: (x: 2.2cm, y: 2cm))
+#set text(font: ("Noto Serif", "Noto Sans Devanagari"), size: 10.5pt)
+#set par(justify: true)
+#set list(marker: [--])
+#show heading.where(level: 1): set text(size: 12pt, weight: "bold")
+#show heading.where(level: 1): it => [#it #v(-2pt) #line(length: 100%, stroke: 0.4pt) #v(2pt)]
+
+#text(size: 19pt, weight: "bold")[<< profile.full_name >>]
+#v(-4pt)
+<< profile.email >> #sym.dot.c << profile.phone >><< " " ~ "·" ~ " " ~ profile.address if profile.address else "" >>
+
+#v(6pt)
+
+<% if summary %>
+<< summary >>
+#v(4pt)
+<% endif %>
+
+<% if education %>
+= << labels.education >>
+<% for edu in education %>
+- *<< edu.degree >>* --- << edu.institution >>, << edu.board_or_university >>, << edu.year >><< ". Score: " ~ edu.score if edu.score else "" >>
+<% endfor %>
+<% endif %>
+
+<% if qualifications %>
+= << labels.qualifications >>
+<% for q in qualifications %>
+- *<< q.type >>* --- << q.issuing_body >>, << q.year >><< " (" ~ q.score_or_paper ~ ")" if q.score_or_paper else "" >>
+<% endfor %>
+<% endif %>
+
+<% if experience %>
+= << labels.experience >>
+<% for exp in experience %>
+*<< exp.school >>*, << exp.post >> (<< exp.board >>) --- << exp.dates >>
+
+<< exp.subjects | join(", ") >>, << labels.classes_label >> << exp.classes_taught | join(", ") >>
+<% for bullet in exp.bullets %>
+- << bullet >>
+<% endfor %>
+
+<% endfor %>
+<% endif %>
+
+<% if admin_roles %>
+= << labels.admin_roles >>
+<% for role in admin_roles %>
+- *<< role.title >>* (<< role.duration >>) --- << role.description >>
+<% endfor %>
+<% endif %>
+
+<% if trainings %>
+= << labels.trainings >>
+<% for t in trainings %>
+- *<< t.title >>* --- << t.organizer >><< ", " ~ t.date if t.date else "" >><< " (" ~ t.hours ~ " hrs)" if t.hours else "" >>
+<% endfor %>
+<% endif %>
+
+<% if edtech_skills %>
+= << labels.edtech_skills >>
+<< edtech_skills | join(", ") >>
+<% endif %>
+
+<% if references %>
+= << labels.references >>
+<% for ref in references %>
+- *<< ref.name >>*, << ref.designation >>, << ref.school >><< " --- " ~ ref.contact if ref.contact else "" >>
+<% endfor %>
+<% endif %>

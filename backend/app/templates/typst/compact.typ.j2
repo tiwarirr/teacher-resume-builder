@@ -1,0 +1,62 @@
+// Typst has no auto-shrink-to-fit: this template stays one page by being
+// deliberately dense (small margins/font, tight heading and list spacing)
+// rather than by measuring content and reflowing - if a resume still
+// overflows, the person needs to trim content, same as any one-page format.
+#set page(margin: (x: 1.4cm, y: 1.2cm))
+#set text(font: ("Noto Sans", "Noto Sans Devanagari"), size: 9pt)
+#set par(justify: true, leading: 0.55em)
+#set list(marker: [#sym.bullet], spacing: 0.35em)
+#set block(spacing: 0.55em)
+#show heading.where(level: 1): set text(size: 10.5pt)
+#show heading.where(level: 1): set block(above: 0.6em, below: 0.3em)
+#show heading.where(level: 2): set text(size: 9.5pt)
+#show heading.where(level: 2): set block(above: 0.35em, below: 0.15em)
+
+#align(center)[
+  #text(size: 15pt, weight: "bold")[<< profile.full_name >>]
+
+  #text(size: 8.5pt)[<< profile.email >> #sym.dot.c << profile.phone >><< " " ~ "·" ~ " " ~ profile.address if profile.address else "" >>]
+]
+#v(2pt)
+#line(length: 100%, stroke: 0.4pt)
+
+<% if summary %>
+#text(size: 8.5pt, style: "italic")[<< summary >>]
+<% endif %>
+
+<% if education %>
+= << labels.education >>
+<% for edu in education %>
+- *<< edu.degree >>*, << edu.institution >> --- << edu.year >><< ", " ~ edu.score if edu.score else "" >>
+<% endfor %>
+<% endif %>
+
+<% if qualifications %>
+= << labels.qualifications >>
+<% for q in qualifications %>
+- *<< q.type >>* --- << q.issuing_body >>, << q.year >>
+<% endfor %>
+<% endif %>
+
+<% if experience %>
+= << labels.experience >>
+<% for exp in experience %>
+== << exp.school >> --- << exp.post >> (<< exp.board >>), << exp.dates >>
+#text(size: 8.5pt, style: "italic")[<< exp.subjects | join(", ") >> #sym.dot.c << labels.classes_label >> << exp.classes_taught | join(", ") >>]
+<% for bullet in exp.bullets %>
+- << bullet >>
+<% endfor %>
+<% endfor %>
+<% endif %>
+
+<% if admin_roles %>
+= << labels.admin_roles >>
+<% for role in admin_roles %>
+- *<< role.title >>* (<< role.duration >>) --- << role.description >>
+<% endfor %>
+<% endif %>
+
+<% if edtech_skills %>
+= << labels.edtech_skills >>
+<< edtech_skills | join(", ") >>
+<% endif %>
